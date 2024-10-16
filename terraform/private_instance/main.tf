@@ -14,5 +14,5 @@ resource "aws_instance" "private_instance" {
 }
 resource "local_file" "instance_ip" {
   content  = aws_instance.private_instance.private_ip
-  filename = "../${path.root}/inventory.ini"
+  filename = "../${path.root}/${var.instance_name}.ini"
 }
