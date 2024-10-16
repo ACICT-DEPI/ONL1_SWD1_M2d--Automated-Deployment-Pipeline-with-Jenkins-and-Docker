@@ -81,7 +81,7 @@ module "public_assosiation_1" {
 
 module "public_assosiation_2" {
   source               = "./association"
-  subnet_id            = module.public_subnet_2.subnet_id
+  subnet_id            = module.public_subnet2.subnet_id
   route_table_id       = module.public_routing_table.routing_table_id
 }
 
@@ -139,7 +139,7 @@ module "jenkins-agent" {
 
 }
 module "jenkins_master" {
-  source = "./instances"
+  source                    = "./public_instance"
   ami_id                    = "ami-0a0e5d9c7acc336f1" 
   instance_type             = "t2.micro"
   instance_name             = "jenkins-master"

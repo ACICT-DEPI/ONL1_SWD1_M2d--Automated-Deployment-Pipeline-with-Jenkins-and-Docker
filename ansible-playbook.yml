@@ -7,13 +7,7 @@
         default_container_image: belalelnady/dockerized-web-app
         # default_container_command: echo "done"
     
-      tasks:
-        # - name: Install aptitude
-        #   apt:
-        #     name: aptitude
-        #     state: latest
-            # update_cache: true
-    
+      tasks: 
         - name: Install required system packages
           apt:
             pkg:
