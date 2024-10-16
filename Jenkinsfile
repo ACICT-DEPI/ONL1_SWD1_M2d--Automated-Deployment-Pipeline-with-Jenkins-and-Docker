@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         // Set your GitHub repository URL
-        REPO_URL = 'https://github.com/belalelnady/Execute-script-from-jenkins'
+        REPO_URL = 'https://github.com/belalelnady/automated-pipeline'
         
         // Define the Docker image name based on the repository name
         IMAGE_NAME = 'dockerized-web-app'
