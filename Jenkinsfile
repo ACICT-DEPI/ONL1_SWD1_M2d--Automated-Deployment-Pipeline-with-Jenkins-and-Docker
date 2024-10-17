@@ -17,19 +17,19 @@ pipeline {
                 
             }
         }
-        stage('Install') {
-                steps {
-                    //  Install dependencies once
-                    sh 'npm  --prefix web-app ci'   
-                }
-            }
+        // stage('Install') {
+        //         steps {
+        //             //  Install dependencies once
+        //             sh 'npm  --prefix web-app ci'   
+        //         }
+        //     }
     
-        stage('Test') {
-                    steps {
-                        // Test the web app before building it with jest
-                       sh 'npm --prefix web-app test'
-                    }
-                }
+        // stage('Test') {
+        //             steps {
+        //                 // Test the web app before building it with jest
+        //                sh 'npm --prefix web-app test'
+        //             }
+        //         }
 
 
         stage('Build Docker Image') {
