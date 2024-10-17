@@ -72,6 +72,22 @@ pipeline {
     
 
     post {
+        success { //runs on success of pipeline
+            emailext (
+                to: 'engahmedharse@gmail.com',
+                subject: "Build Success: ${currentBuild.fullDisplayName}",
+                body: "<p>Good news! The build was successful.</p>",
+                mimeType: 'text/html'
+            )
+        }
+        failure { //runs on failure of pipeline
+            emailext (
+                to: 'engahmedharse@gmail.com',
+                subject: "Build Failed: ${currentBuild.fullDisplayName}",
+                body: "<p>Oops! The build has failed.</p>",
+                mimeType: 'text/html'
+            )
+        }
         always {
             // Cleanup Docker images
             sh 'docker rmi ${IMAGE_NAME} || true'
