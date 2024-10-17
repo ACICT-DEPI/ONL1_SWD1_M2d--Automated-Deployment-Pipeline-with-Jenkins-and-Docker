@@ -10,9 +10,8 @@ resource "aws_instance" "private_instance" {
     Name = var.instance_name
   }
 
+  provisioner "local-exec" {
+    command = "echo ${aws_instance.private_instance.private_ip} >> ../inventory.ini "
+  }
 
-}
-resource "local_file" "instance_ip" {
-  content  = aws_instance.private_instance.private_ip
-  filename = "../${path.root}/${var.instance_name}.ini"
 }

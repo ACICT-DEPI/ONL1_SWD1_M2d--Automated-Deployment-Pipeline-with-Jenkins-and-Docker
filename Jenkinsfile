@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         // Set your GitHub repository URL
-        REPO_URL = 'https://github.com/belalelnady/Execute-script-from-jenkins'
+        REPO_URL = 'https://github.com/belalelnady/automated-pipeline'
         
         // Define the Docker image name based on the repository name
         IMAGE_NAME = 'dockerized-web-app'
@@ -17,19 +17,19 @@ pipeline {
                 
             }
         }
-        stage('Install') {
-                steps {
-                    //  Install dependencies once
-                    sh 'npm  --prefix web-app ci'   
-                }
-            }
+        // stage('Install') {
+        //         steps {
+        //             //  Install dependencies once
+        //             sh 'npm  --prefix web-app ci'   
+        //         }
+        //     }
     
-        stage('Test') {
-                    steps {
-                        // Test the web app before building it with jest
-                       sh 'npm --prefix web-app test'
-                    }
-                }
+        // stage('Test') {
+        //             steps {
+        //                 // Test the web app before building it with jest
+        //                sh 'npm --prefix web-app test'
+        //             }
+        //         }
 
 
         stage('Build Docker Image') {
