@@ -27,7 +27,7 @@ function App() {
         {/* Created By Section */}
         <footer>
           <h3>Created by: </h3>
-          <p>Belala Nady, Ahmed Abdelhares, Aya Alaa, Ahmed Darder, Mohamed Salama , Asmhan Salah</p>
+          <p>Belal Elnady, Ahmed Abdelhares, Aya Alaa, Ahmed Darder, Mohamed Salama , Asmhan Salah</p>
         </footer>
       </header>
     </div>
