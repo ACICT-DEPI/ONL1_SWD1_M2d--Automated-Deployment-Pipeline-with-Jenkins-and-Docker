@@ -47,6 +47,7 @@
           community.docker.docker_image:
             name:  belalelnady/dockerized-web-app
             source: pull
+            force_pull: true 
                 
    
         - name: Create default containers
@@ -57,4 +58,5 @@
               - "80:80" 
             restart_policy: always
             state: started
+            recreate: always
       

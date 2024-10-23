@@ -5,6 +5,20 @@
   remote_user: ubuntu  # Specify the user to connect as
 
   tasks:
+
+    # Copy the key-pair to the agent machine
+    - name: Copy the key pair to the target machine
+      copy:
+        src: ~/.ssh/pipeline_key.pem # Path to the local key pair you want to copy
+        dest: /home/ubuntu/pipeline_key.pem # Path on the agent machine
+        mode: '0600'  # Set permissions to 600   
+
+    - name: Change ownership of the key-par file
+      file:
+        path: /home/ubuntu/pipeline_key.pem 
+        owner: ubuntu  
+        group: ubuntu  
+
     - name: Update apt cache
       apt:
         update_cache: yes
@@ -71,20 +85,6 @@
       apt: 
         name: openjdk-17-jdk
         state: present
-
-
-    # Copy the key-pair to the agent machine
-    - name: Copy the key pair to the target machine
-      copy:
-        src: ~/.ssh/pipeline_key.pem # Path to the local key pair you want to copy
-        dest: /home/ubuntu/pipeline_key.pem # Path on the agent machine
-        mode: '0600'  # Set permissions to 600   
-
-    - name: Change ownership of the key-par file
-      file:
-        path: /home/ubuntu/pipeline_key.pem 
-        owner: ubuntu  
-        group: ubuntu  
 
 
     - name: Change permissions of a specific file
