@@ -1,12 +1,7 @@
 ---
     - hosts: all
       become: true
-      vars:
-        container_count: 1
-        default_container_name: docker
-        default_container_image: belalelnady/dockerized-web-app
-        # default_container_command: echo "done"
-    
+  
       tasks: 
         - name: Install required system packages
           apt:
@@ -50,17 +45,16 @@
  
         - name: Pull default Docker image
           community.docker.docker_image:
-            name: "{{ default_container_image }}"
+            name:  belalelnady/dockerized-web-app
             source: pull
                 
-    
+   
         - name: Create default containers
           community.docker.docker_container:
-            name: "{{ default_container_name }}{{ item }}"
-            image: "{{ default_container_image }}"
+            name:  belalelnady/dockerized-web-app
+            image:  belalelnady/dockerized-web-app
             published_ports:
               - "80:80" 
             restart_policy: always
-            # command: "{{ default_container_command }}"
             state: started
-          with_sequence: count={{ container_count }}
+      

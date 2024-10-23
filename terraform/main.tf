@@ -124,18 +124,7 @@ module "jenkins-agent" {
   public_sg_id     = module.security_groups.public_sg_id
   depends_on       = [module.internet_gateway]
   key_name         = module.key_pair.key_name
-  user_data        = <<-EOF
-              #!/bin/bash
-              sudo apt update -y
-              sudo apt install -y python3-pip
-              pip3 install ansible
-              sudo apt install git-all
-              sudo apt-get install openjdk-11-jdk -y
-              curl -fsSL https://test.docker.com -o test-docker.sh
-              sudo sh test-docker.sh
-              curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -
-              sudo apt-get install -y nodejs
-              EOF
+  user_data        = ""
 
 }
 module "jenkins_master" {
@@ -147,20 +136,7 @@ module "jenkins_master" {
   public_sg_id     = module.security_groups.public_sg_id
   depends_on       = [module.internet_gateway]
   key_name         = module.key_pair.key_name
-  user_data        = <<-EOF
-              #!/bin/bash
-              sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
-              https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
-
-              echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]" \
-                  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
-                  /etc/apt/sources.list.d/jenkins.list > /dev/null
-
-              sudo apt-get update
-              sudo apt install openjdk-17-jre-headless -y
-              sudo apt-get install fontconfig openjdk-17-jre -y
-              sudo apt-get install jenkins -y 
-              EOF
+  user_data        = ""
 }
 
 module "web-app1" {

@@ -1,4 +1,4 @@
-chmod 600 ~/.ssh/pipeline_key.pem
+chmod 400 ~/.ssh/pipeline_key.pem
 # run the playbooks for jenkins agent and master
 ansible-playbook -i ../jenkins-master.ini master-playbook.yml --private-key ~/.ssh/pipeline_key.pem --ssh-extra-args="-o StrictHostKeyChecking=no"
 ansible-playbook -i ../jenkins-agent.ini agent-playbook.yml --private-key ~/.ssh/pipeline_key.pem --ssh-extra-args="-o StrictHostKeyChecking=no"
