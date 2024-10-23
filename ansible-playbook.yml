@@ -47,8 +47,7 @@
           community.docker.docker_image:
             name:  belalelnady/dockerized-web-app
             source: pull
-            force_pull: true 
-                
+          
    
         - name: Create default containers
           community.docker.docker_container:
