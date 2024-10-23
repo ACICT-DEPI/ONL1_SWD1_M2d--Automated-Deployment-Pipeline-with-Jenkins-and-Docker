@@ -45,14 +45,14 @@
  
         - name: Pull default Docker image
           community.docker.docker_image:
-            name:  "belalelnady/dockerized-web-app"
+            name:  belalelnady/dockerized-web-app
             source: pull
           
    
         - name: Create default containers
           community.docker.docker_container:
-            name:  "belalelnady/dockerized-web-app"
-            image:  "belalelnady/dockerized-web-app"
+            name:  dockerized-web-app
+            image:  belalelnady/dockerized-web-app
             published_ports:
               - "80:80" 
             restart_policy: always
