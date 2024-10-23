@@ -57,5 +57,5 @@
               - "80:80" 
             restart_policy: always
             state: started
-            recreate: always
+        
       
