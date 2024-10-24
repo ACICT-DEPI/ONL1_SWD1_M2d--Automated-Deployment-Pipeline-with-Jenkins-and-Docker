@@ -11,7 +11,7 @@
       copy:
         src: ~/.ssh/pipeline_key.pem # Path to the local key pair you want to copy
         dest: /home/ubuntu/pipeline_key.pem # Path on the agent machine
-        mode: '0600'  # Set permissions to 600   
+        mode: '0400'  # Set permissions to 400   
 
     - name: Change ownership of the key-par file
       file:
@@ -87,9 +87,10 @@
         state: present
 
 
-    - name: Change permissions of a specific file
-      file:
-        path: /var/run/docker.sock 
-        mode: '0777'  
+    - name:  user is present and added to docker group
+      user:
+        name: "ubuntu"  # Replace with the actual username
+        groups: "docker"  # Replace with the group name
+        append: yes     
 
    
