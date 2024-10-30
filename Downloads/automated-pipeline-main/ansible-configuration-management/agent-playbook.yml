@@ -1,0 +1,96 @@
+---
+- name: Install pip3, Ansible, Docker, and Node.js
+  hosts: all
+  become: yes
+  remote_user: ubuntu  # Specify the user to connect as
+
+  tasks:
+
+    # Copy the key-pair to the agent machine
+    - name: Copy the key pair to the target machine
+      copy:
+        src: ~/.ssh/pipeline_key.pem # Path to the local key pair you want to copy
+        dest: /home/ubuntu/pipeline_key.pem # Path on the agent machine
+        mode: '0400'  # Set permissions to 400   
+
+    - name: Change ownership of the key-par file
+      file:
+        path: /home/ubuntu/pipeline_key.pem 
+        owner: ubuntu  
+        group: ubuntu  
+
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    # Install pip3
+    - name: Install pip3 and dependencies
+      apt:
+        name: python3-pip
+        state: present
+
+    # Install Ansible using pip3
+    - name: Install Ansible using pip3
+      pip:
+        name: ansible
+        executable: pip3
+
+    # Install Docker dependencies
+    - name: Install required dependencies for Docker
+      apt:
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+        state: present
+
+    # Add Docker’s official GPG key
+    - name: Add Docker’s official GPG key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    # Set up the Docker stable repository
+    - name: Add Docker apt repository
+      apt_repository:
+        repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+        state: present
+
+    # Update apt cache after adding Docker repository
+    - name: Update apt cache after adding Docker repository
+      apt:
+        update_cache: yes
+
+    # Install Docker
+    - name: Install Docker
+      apt:
+        name: docker-ce
+        state: present
+
+    # Install Git
+    - name: Install Git
+      apt:
+        name: git
+        state: present
+
+    # Start and enable Docker service
+    - name: Start and enable Docker service
+      systemd:
+        name: docker
+        enabled: yes
+        state: started
+
+    - name: install java #install java as jenkins need jdk
+      apt: 
+        name: openjdk-17-jdk
+        state: present
+
+
+    - name:  user is present and added to docker group
+      user:
+        name: "ubuntu"  # Replace with the actual username
+        groups: "docker"  # Replace with the group name
+        append: yes     
+
+   
